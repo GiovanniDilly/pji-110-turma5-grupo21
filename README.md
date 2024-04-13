@@ -24,8 +24,8 @@ This work aims to develop a web system with a database to be used in the registr
 - **HTML, CSS, JS**, para o design de página Web (to design Web pages)
 
 ## Para instalar o projeto
-- **1.**  Instalar Python (preferencialmente da versão 3.10 para cima)
-- **2.**  Fazer o download do repositório (ou git push)
-- **3.**  No Terminal, rodando no diretório do projeto, executar `python venv venv`, para criar o ambiente virtual do Python (aqui se utiliza o nome "venv", mas pode trocar o nome por qualquer outro).
-- **4.**  Ascender ao ambiente virtual "venv" recém criado (normalmente com o comando `.\venv\Scripts\activate`, no Windows e na mesma pasta do passo anterior). O comando terá funcionado se no Terminal aparecer "(venv)", como por exemplo `(venv) C:\Users\Projeto\Desktop\PJI 110`.
-- **5.**  Executar no terminal o comando `pip install -r requirements. txt` para instalar as bibliotecas do projeto.
+1. Instalar Python (preferencialmente da versão 3.10 para cima)
+2. Fazer o download do repositório (ou git push)
+3. No Terminal, rodando no diretório do projeto, executar `python venv venv`, para criar o ambiente virtual do Python (aqui se utiliza o nome "venv", mas pode trocar o nome por qualquer outro).
+4. Ascender ao ambiente virtual "venv" recém criado (normalmente com o comando `.\venv\Scripts\activate`, no Windows e na mesma pasta do passo anterior). O comando terá funcionado se no Terminal aparecer "(venv)", como por exemplo `(venv) C:\Users\Projeto\Desktop\PJI 110`.
+5. Executar no terminal o comando `pip install -r requirements. txt` para instalar as bibliotecas do projeto.
