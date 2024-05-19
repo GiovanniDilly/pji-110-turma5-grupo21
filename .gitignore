@@ -3,3 +3,9 @@ venv/
 
 # Ignore test python file
 test.py
+
+django_project/database/admin.
+
+notes.txt
+
+admin.cnf
