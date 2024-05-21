@@ -1,11 +1,5 @@
 # Ignore virtual env for installing Python libraries
 venv/
 
-# Ignore test python file
-test.py
-
-django_project/database/admin.
-
+# Ignore dev personal notes
 notes.txt
-
-admin.cnf

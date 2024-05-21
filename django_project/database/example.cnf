@@ -1,9 +1,0 @@
-# arquivo de configuração para acesso ao banco de dados MySQL
-[client]
-
-host = {HOST}
-port = {PORTA}
-database = {NOME_BASE_DE_DADOS}
-user = {USUARIO}
-password = {SENHA}
-default-character-set = utf8
