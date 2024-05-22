@@ -19,13 +19,19 @@ This work aims to develop a web system with a database to be used in the registr
 
 ## Tecnologias Usadas (Used tecnologies)
 - **Python**, para construção de toda lógica do aplicativo (main programming language for the backend)
-- **Django**, para construção do servidor e da interface Web (for the Web server and its interface)
-- **SQLite3**, para o Banco de Dados do projeto (as the project SGDB)
-- **HTML, CSS, JS**, para o design de página Web (to design Web pages)
+- **Odoo**, framework que servirá como servidor, cujo sistema faremos um módulo, com lógica da interface Web e modelagem do banco de dados feita por intermédio do próprio framework.
+- **PostgreSQL**, para o Banco de Dados do projeto (as the project SGDB)
+- **XML**, para o design das views no Odoo
 
-## Para instalar o projeto
-1. Instalar Python (preferencialmente da versão 3.10 para cima)
-2. Fazer o download do repositório (ou git push)
-3. No Terminal, rodando no diretório do projeto, executar `python venv venv`, para criar o ambiente virtual do Python (aqui se utiliza o nome "venv", mas pode trocar o nome por qualquer outro).
-4. Ascender ao ambiente virtual "venv" recém criado (normalmente com o comando `.\venv\Scripts\activate`, no Windows e na mesma pasta do passo anterior). O comando terá funcionado se no Terminal aparecer "(venv)", como por exemplo `(venv) C:\Users\Projeto\Desktop\PJI 110`.
-5. Executar no terminal o comando `pip install -r requirements. txt` para instalar as bibliotecas do projeto.
+## Para instalar o projeto ()
+1. Instalar Python (versão 3.8)
+2. necessária continuação...
+
+
+[//]: # (2. Fazer o download do repositório &#40;ou git push&#41;)
+
+[//]: # (3. No Terminal, rodando no diretório do projeto, executar `python venv venv`, para criar o ambiente virtual do Python &#40;aqui se utiliza o nome "venv", mas pode trocar o nome por qualquer outro&#41;.)
+
+[//]: # (4. Ascender ao ambiente virtual "venv" recém criado &#40;normalmente com o comando `.\venv\Scripts\activate`, no Windows e na mesma pasta do passo anterior&#41;. O comando terá funcionado se no Terminal aparecer "&#40;venv&#41;", como por exemplo `&#40;venv&#41; C:\Users\Projeto\Desktop\PJI 110`.)
+
+[//]: # (5. Executar no terminal o comando `pip install -r requirements. txt` para instalar as bibliotecas do projeto.)

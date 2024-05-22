@@ -1,5 +1,23 @@
 # Ignore virtual env for installing Python libraries
 venv/
 
-# Ignore test python file
-test.py
+# Ignore personal dev notes
+notes.txt
+
+#  Except for this:
+!LICENSE
+!README.md
+!.gitignore
+!requirements.txt
+
+# Ignorar uma pasta antiga do projeto e pastas da IDE utilizada
+django_project
+.idea
+
+# Ignorar o Odoo 15. Ele pode ser baixado da fonte oficial. Focando o repositório apenas para o módulo personalizado que, com o Odoo 15, fará o Web App
+/odoo-15.0/*
+/odoo-15.0/.mailmap
+/database.properties
+/odoo-15.0/.github/
+
+!modulos_customizados
