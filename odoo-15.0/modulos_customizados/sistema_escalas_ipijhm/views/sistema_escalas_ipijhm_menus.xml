@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="sistema_escalas_ipijhm_menu_root" name="Sistema de Escalas IPIJHM" sequence="10">
+        <menuitem id="sistema_escalas_ipijhm_escala_menu" action="sistema_escalas_ipijhm_escala_action"
+                  name="Escala" sequence="10"/>
+    </menuitem>
+</odoo>

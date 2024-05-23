@@ -20,4 +20,6 @@ django_project
 /database.properties
 /odoo-15.0/.github/
 
+odoo.conf
+
 !modulos_customizados

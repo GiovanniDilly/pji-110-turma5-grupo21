@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sistema_escalas_ipijhm_evento_action_tree" model="ir.ui.view">
+        <field name="name">sistema_escalas_ipijhm.evento.tree</field>
+        <field name="model">sistema_escalas_ipijhm.evento</field>
+        <field name="arch" type="xml">
+            <tree string="Eventos">
+                <field name="data_horario"/>
+                <field name="status"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sistema_escalas_ipijhm_evento_form" model="ir.ui.view">
+        <field name="name">sistema_escalas_ipijhm.evento.form</field>
+        <field name="model">sistema_escalas_ipijhm.evento</field>
+        <field name="arch" type="xml">
+            <form string="Escala">
+                <header>
+                    <button name="concluir_evento" class="btn-primary" type="object" string="Concluir Evento"
+                            attrs="{'invisible': [('status', '!=', '2')]}"/>
+                    <button name="cancelar_evento" class="btn-danger" type="object" string="Cancelar Evento"
+                            attrs="{'invisible': [('status', '!=', '1'), ('status', '!=', '2')]}"/>
+                    <field name="status" widget="statusbar" statusbar_visible="0,1,2,3"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="descricao"/>
+                    </group>
+                    <group>
+                        <field name="data_horario"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+<!--   <record id="sistema_escalas_ipijhm_evento_search" model="ir.ui.view">-->
+<!--        <field name="name">sistema_escalas_ipijhm.evento.search</field>-->
+<!--        <field name="model">sistema_escalas_ipijhm.evento</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Buscar">-->
+<!--                <field name="valor"/>-->
+<!--                <field name="tipo_transacao"/>-->
+
+<!--                <filter name="filter_em_dinheiro" string="Em Dinheiro" domain="[('tipo_transacao', '=', 'dinheiro')]"/>-->
+<!--                <filter name="filter_em_conta" string="Em Conta" domain="['!', ('tipo_transacao', '=', 'dinheiro')]"/>-->
+<!--                <separator/>-->
+<!--                <filter name="filter_escala" string="Entrada" domain="[('valor', '>', 0)]"/>-->
+<!--                <filter name="filter_saida" string="Saída" domain="['!', ('valor', '>', '0')]"/>-->
+<!--                <separator/>-->
+<!--                <filter name="filter_aprovado" string="Realizadas" domain="['|', ('status', '=', 'feito'), ('status', '=', 'aprovado')]"/>-->
+<!--                <filter name="filter_nao_aprovado" string="Não Realizadas" domain="['&amp;', ('status', '!=', 'feito'), ('status', '!=', 'aprovado')]"/>-->
+
+<!--                <group expand="1" string="Group By">-->
+<!--                    <filter string="Agrupar por Data da Transação" name="group_by_data_transacao" context="{'group_by':'data_transacao:month'}"/>-->
+<!--                </group>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="sistema_escalas_ipijhm_evento_action" model="ir.actions.act_window">
+        <field name="name">Eventos</field>
+        <field name="res_model">sistema_escalas_ipijhm.evento</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                View dos Eventos de uma Escala do Sistema de Escalas da IPIJHM
+            </p>
+        </field>
+    </record>
+</odoo>
