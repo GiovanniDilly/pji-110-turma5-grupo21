@@ -1,7 +1,7 @@
 from datetime import datetime
-from odoo.exceptions import UserError
 
 from odoo import fields, models, api
+from odoo.exceptions import UserError
 
 
 class SistemaEscalasEventoModel(models.Model):
@@ -15,6 +15,10 @@ class SistemaEscalasEventoModel(models.Model):
     data_horario = fields.Datetime(string="Data e Horário do Evento", required=True)
 
     escala_id = fields.Many2one("sistema_escalas_ipijhm.escala", string="Escala", required=True)
+    atividade_ids = fields.One2many("sistema_escalas_ipijhm.atividade", "evento_id")
+
+    qtd_atividades_pendentes = fields.Integer(string="Qtd. Atividades Pendentes", compute="_qtd_atividade_pendentes",
+                                             readonly=True)
 
     evento_concluido = fields.Boolean(string="Evento foi Concluído?", default=False)
     evento_cancelado = fields.Boolean(string="Evento foi Cancelado?", default=False)
@@ -56,6 +60,14 @@ class SistemaEscalasEventoModel(models.Model):
             record.evento_cancelado = True
 
         return True
+
+    @api.depends('atividade_ids')
+    def _qtd_atividade_pendentes(self):
+
+        for record in self:
+            status_atividades = [x.status for x in record.atividade_ids]
+
+            record.qtd_atividades_pendentes = status_atividades.count("0")
 
     @api.depends('create_date', 'evento_concluido', 'evento_cancelado', 'data_horario')
     def _status_evento(self):

@@ -14,6 +14,8 @@
         'security\\ir.model.access.csv',
         'views\\sistema_escalas_ipijhm_escala.xml',
         'views\\sistema_escalas_ipijhm_evento.xml',
+        'views\\sistema_escalas_ipijhm_atividade.xml',
+        'views\\res_user_sistema_escalas_view.xml',
         'views\\sistema_escalas_ipijhm_menus.xml'
     ],
     'installable': True,

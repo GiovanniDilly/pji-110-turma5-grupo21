@@ -8,6 +8,7 @@
                 <field name="data_horario"/>
                 <field name="status"/>
                 <field name="create_date"/>
+                <field name="qtd_atividades_pendentes"/>
             </tree>
         </field>
     </record>
@@ -16,7 +17,7 @@
         <field name="name">sistema_escalas_ipijhm.evento.form</field>
         <field name="model">sistema_escalas_ipijhm.evento</field>
         <field name="arch" type="xml">
-            <form string="Escala">
+            <form string="Evento">
                 <header>
                     <button name="concluir_evento" class="btn-primary" type="object" string="Concluir Evento"
                             attrs="{'invisible': [('status', '!=', '2')]}"/>
@@ -26,11 +27,21 @@
                 </header>
                 <sheet>
                     <group>
-                        <field name="descricao"/>
+                        <group>
+                            <field name="descricao"/>
+                        </group>
+                        <group>
+                            <field name="data_horario"/>
+                            <field name="qtd_atividades_pendentes"/>
+                        </group>
                     </group>
-                    <group>
-                        <field name="data_horario"/>
-                    </group>
+                    <notebook>
+                        <page string="Atividades">
+                            <group>
+                                <field name="atividade_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
