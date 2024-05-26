@@ -1,6 +1,6 @@
 {
     'name': 'Sistemas de Escalas da IPIJHM',
-    'version': '1.0.0',
+    'version': '1.0.1',
     'author': 'PJI110-TURMA005-GRUPO21',
     'category': 'Contabilidade',
     'summary': """

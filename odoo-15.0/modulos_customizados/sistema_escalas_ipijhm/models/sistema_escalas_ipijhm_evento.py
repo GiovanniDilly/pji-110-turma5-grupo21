@@ -1,8 +1,7 @@
-import itertools
 from datetime import datetime
 
 from odoo import fields, models, api
-from odoo.exceptions import UserError, Warning
+from odoo.exceptions import UserError
 
 
 class SistemaEscalasEventoModel(models.Model):
@@ -37,8 +36,8 @@ class SistemaEscalasEventoModel(models.Model):
                               readonly=True)
 
     def write(self, vals):
-        if vals.get('evento_rascunhado', False):
-            vals['evento_rascunhado'] = True
+        if vals.get('status', "0"):
+            vals['status'] = "1"
 
         return super(SistemaEscalasEventoModel, self).write(vals)
 

@@ -10,12 +10,12 @@ class SistemaEscalasSolicitacoesModel(models.Model):
 
     name = fields.Char(string="Nome da Solicitação", compute="_define_nome", readonly=True)
     motivo = fields.Text(string="Motivo da Solicitação", required=True)
-    atividades_afetadas = fields.Text(string="Atividades Afetadas", readonly=True)
+    atividades_afetadas = fields.Text(string="Atividades Afetadas", compute="_atividades_afetadas", readonly=True)
 
     data_inicio = fields.Date(string="Data de Início", required=True)
     data_fim = fields.Date(string="Data do Fim", required=True)
 
-    colaborador = fields.Many2one("res.users", string="Colaborador", default=lambda self: self.env.user, required=True)
+    colaborador = fields.Many2one("res.users", string="Colaborador", default=lambda self: self.env.user, readonly=True)
 
     colaborador_nome = fields.Char(string="Nome do Colaborador", related="colaborador.name")
 
@@ -30,28 +30,7 @@ class SistemaEscalasSolicitacoesModel(models.Model):
         if vals.get('status') == "-1":
             vals['status'] = "0"
 
-        mensagem = ""
-        atividades_impactadas = self.env['sistema_escalas_ipijhm.atividade'].search(
-            [('escalados_ids', '=', self.colaborador.id),
-             ('evento_id.data_horario', '>=', self.data_inicio),
-             ('evento_id.data_horario', '<=', self.data_fim)])
-
-        for ativ in atividades_impactadas:
-            if ativ.status in ('-1', '0', '5'):
-                mensagem += \
-                    f'→ "{ativ.name}" de "{ativ.evento_id.name}" de data e horário: ' + \
-                    f'[{ativ.evento_id.data_horario.strftime("%d/%m/%Y - %H:%M:%S")}] conflitam com esta solicitação. \n'
-
-        vals['atividades_afetadas'] = mensagem
-
         return super(SistemaEscalasSolicitacoesModel, self).write(vals)
-
-    # @api.onchange("colaborador", "data_inicio", "data_fim")
-    # def _onchange_partner_id(self):
-    #     self.name = "Document for %s" % (self.partner_id.name)
-    #     self.description = "Default description for %s" % (self.partner_id.name)
-
-    # self.env["sistema_escalas_ipijhm.atividade"].search([('escalados_ids', '=', vals.get('colaborador'))])
 
     @api.depends('data_inicio', 'data_fim', 'colaborador_nome', 'categoria')
     def _define_nome(self):
@@ -77,5 +56,27 @@ class SistemaEscalasSolicitacoesModel(models.Model):
                 if rotulo_categoria + data_inicio_formatada + data_fim_formatada != "":
                     record['name'] = f"Solicitação de {record['colaborador_nome']}" + \
                                      f" - {data_inicio_formatada} à {data_fim_formatada}, {rotulo_categoria}"
+                    continue
+                else:
+                    record['name'] = ''
+                    continue
             except:
                 record['name'] = ''
+
+    def _atividades_afetadas(self):
+
+        for record in self:
+
+            mensagem = ""
+            atividades_impactadas = self.env['sistema_escalas_ipijhm.atividade'].search(
+                [('escalados_ids', '=', self.colaborador.id),
+                 ('evento_id.data_horario', '>=', self.data_inicio),
+                 ('evento_id.data_horario', '<=', self.data_fim)])
+
+            for ativ in atividades_impactadas:
+                if ativ.status in ('-1', '0', '5'):
+                    mensagem += \
+                        f'→ "{ativ.name}" de "{ativ.evento_id.name}" de data e horário: ' + \
+                        f'[{ativ.evento_id.data_horario.strftime("%d/%m/%Y - %H:%M:%S")}] conflitam com esta solicitação. \n'
+
+            record['atividades_afetadas'] = mensagem
