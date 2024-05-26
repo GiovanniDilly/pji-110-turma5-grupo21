@@ -1,8 +1,8 @@
-from datetime import datetime
 import itertools
+from datetime import datetime
 
 from odoo import fields, models, api
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, Warning
 
 
 class SistemaEscalasEventoModel(models.Model):
@@ -25,10 +25,8 @@ class SistemaEscalasEventoModel(models.Model):
     qtd_atividades = fields.Integer(string="Qtd. Atividades", compute="_qtd_atividades",
                                     readonly=True)
 
-
     evento_concluido = fields.Boolean(string="Evento foi Concluído?", default=False)
     evento_cancelado = fields.Boolean(string="Evento foi Cancelado?", default=False)
-    evento_com_erro = fields.Boolean(string="Evento com Erro?", default=False)
 
     status = fields.Selection(string="Status", selection=[("0", "Rascunho"),
                                                           ("1", "Publicada"),
@@ -41,30 +39,6 @@ class SistemaEscalasEventoModel(models.Model):
     def write(self, vals):
         if vals.get('evento_rascunhado', False):
             vals['evento_rascunhado'] = True
-
-        escalados = [[esc.id for esc in ativ.escalados_ids] for ativ in self.atividade_ids]
-        ids_escalados = list(set(itertools.chain.from_iterable(escalados)))
-
-        todas_solicitacoes = self.env['sistema_escalas_ipijhm.solicitacao'].search([])
-
-        solicitacoes_impactantes = self.env['sistema_escalas_ipijhm.solicitacao'].search(
-            [('colaborador', '=', ids_escalados),
-             ('data_inicio', '<=', self.data_horario),
-             ('data_fim', '>=', self.data_horario)])
-
-
-        atividades_impactadas = self.env['sistema_escalas_ipijhm.atividade'].search([('id', '=', solicitacoes_impactantes.ids)])
-
-        for ativ in atividades_impactadas:
-            ativ.possui_erro = True
-            vals['evento_com_erro'] = True
-
-        atividades_nao_impactadas = self.env['sistema_escalas_ipijhm.atividade'].search(
-            [('id', '!=', solicitacoes_impactantes.ids)])
-
-        for ativ in atividades_impactadas:
-            ativ.possui_erro = True
-            vals['evento_com_erro'] = True
 
         return super(SistemaEscalasEventoModel, self).write(vals)
 
@@ -111,14 +85,17 @@ class SistemaEscalasEventoModel(models.Model):
     def _status_evento(self):
 
         for record in self:
-            if record.evento_com_erro:
-                record.status = '5'
-                continue
             if record.evento_cancelado:
                 record.status = '4'
                 continue
             if record.evento_concluido:
                 record.status = '3'
+                continue
+
+            atividades_com_erro = [x for x in record.atividade_ids if x.possui_erro]
+
+            if len(atividades_com_erro) > 0:
+                record.status = '5'
                 continue
 
             if not record.create_date:

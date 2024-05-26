@@ -9,8 +9,5 @@ class Users(models.Model):
     data_nascimento = fields.Date(string="Data Nascimento")
     genero = fields.Selection(string="Gênero", selection=[("M", "Masculino"), ("F", "Feminino")])
 
-    privilegio_sistema_escala = fields.Selection(string="Privilégio no Sistema de Escalas da IPIJHM",
-                                                 selection=[("0", "Usuário Normal"), ("1", "Administrador")],
-                                                 default="0")
-
-    solicitacoes_conflitantes = fields.Many2one("sistema_escalas_ipijhm.solicitacao", string="Solcitações Conflitantes")
+    solicitacoes_ausencia_ids = fields.One2many("sistema_escalas_ipijhm.solicitacao", "colaborador",
+                                                string="Solicitações de Ausência", readonly=True)

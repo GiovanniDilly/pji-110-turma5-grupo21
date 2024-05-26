@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, api
 from odoo.exceptions import UserError
 
 
@@ -18,34 +18,64 @@ class SistemaEscalasAtividadeModel(models.Model):
                                   selection=[('0', 'Nula'), ('1', 'Pequena'), ('2', 'Média'), ('3', 'Alta')],
                                   required=True, default="1")
 
-    possui_erro = fields.Boolean(string="Escalação com Erro?", default=False, readonly=True)
+    possui_erro = fields.Boolean(string="Escalação com Erro?", default=False, compute="_possui_erro", readonly=True)
 
     status = fields.Selection(string="Status", selection=[("-1", "Rascunho"),
                                                           ("0", "Pendente"),
                                                           ("1", "Concluída"),
-                                                          ("2", "Cancelada"),
-                                                          ("3", "Erro")], default="-1", readonly=True)
+                                                          ("2", "Cancelada")], default="-1", readonly=True)
 
     escalados_ids = fields.Many2many("res.users", string="Escalados na Atividade", required=True)
 
+    escalados_conflitantes_ids = fields.Many2one("res.users", string="Escalados Conflitantes", readonly=True)
+
     def write(self, vals):
-        if vals.get('status') == "-1":
+        if vals.get('status') == "-1" or self.status == "-1":
             vals['status'] = "0"
+
+        escalados = self.escalados_ids
+
+        data_evento = self.evento_id.data_horario.date()
+
+        for escalado in escalados:
+            solicitacoes_conflitantes = self.env['sistema_escalas_ipijhm.solicitacao'].search(
+                [('colaborador', '=', escalado.id),
+                 ('data_inicio', '<=', data_evento),
+                 ('data_fim', '>=', data_evento)])
+
+            if len(solicitacoes_conflitantes) > 0:
+                ativ_possui_erro = True
+                break
 
         return super(SistemaEscalasAtividadeModel, self).write(vals)
 
-    def resolver_erros(self):
+    @api.depends('escalados_ids', 'escalados_conflitantes_ids')
+    def _possui_erro(self):
 
         for record in self:
-            if record.status == '1':
+
+            ativ_possui_erro = False
+
+            escalados = record.escalados_ids
+
+            data_evento = record.evento_id.data_horario.date()
+
+            for escalado in escalados:
+                solicitacoes_conflitantes = self.env['sistema_escalas_ipijhm.solicitacao'].search(
+                    [('colaborador', '=', escalado.id),
+                     ('data_inicio', '<=', data_evento),
+                     ('data_fim', '>=', data_evento)])
+
+                if len(solicitacoes_conflitantes) > 0:
+                    ativ_possui_erro = True
+                    break
+
+            if ativ_possui_erro:
+                record.possui_erro = True
                 continue
-
-            if record.status == '2':
-                raise UserError("A atividade já foi cancelada!")
-
-            record.status = "1"
-
-        return True
+            else:
+                record.possui_erro = False
+                continue
 
     def concluir_atividade(self):
         for record in self:

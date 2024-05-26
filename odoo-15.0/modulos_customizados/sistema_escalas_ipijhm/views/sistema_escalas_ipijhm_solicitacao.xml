@@ -33,6 +33,9 @@
                             <field name="categoria"/>
                         </group>
                     </group>
+                    <group>
+                        <field name="atividades_afetadas"/>
+                    </group>
                 </sheet>
             </form>
         </field>

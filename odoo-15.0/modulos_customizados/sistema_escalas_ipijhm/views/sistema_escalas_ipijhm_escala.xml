@@ -41,30 +41,6 @@
         </field>
     </record>
     
-<!--   <record id="sistema_escalas_ipijhm_escala_search" model="ir.ui.view">-->
-<!--        <field name="name">sistema_escalas_ipijhm.escala.search</field>-->
-<!--        <field name="model">sistema_escalas_ipijhm.escala</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search string="Buscar">-->
-<!--                <field name="valor"/>-->
-<!--                <field name="tipo_transacao"/>-->
-
-<!--                <filter name="filter_em_dinheiro" string="Em Dinheiro" domain="[('tipo_transacao', '=', 'dinheiro')]"/>-->
-<!--                <filter name="filter_em_conta" string="Em Conta" domain="['!', ('tipo_transacao', '=', 'dinheiro')]"/>-->
-<!--                <separator/>-->
-<!--                <filter name="filter_escala" string="Entrada" domain="[('valor', '>', 0)]"/>-->
-<!--                <filter name="filter_saida" string="Saída" domain="['!', ('valor', '>', '0')]"/>-->
-<!--                <separator/>-->
-<!--                <filter name="filter_aprovado" string="Realizadas" domain="['|', ('status', '=', 'feito'), ('status', '=', 'aprovado')]"/>-->
-<!--                <filter name="filter_nao_aprovado" string="Não Realizadas" domain="['&amp;', ('status', '!=', 'feito'), ('status', '!=', 'aprovado')]"/>-->
-
-<!--                <group expand="1" string="Group By">-->
-<!--                    <filter string="Agrupar por Data da Transação" name="group_by_data_transacao" context="{'group_by':'data_transacao:month'}"/>-->
-<!--                </group>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
-
     <record id="sistema_escalas_ipijhm_escala_action" model="ir.actions.act_window">
         <field name="name">Escalas</field>
         <field name="res_model">sistema_escalas_ipijhm.escala</field>

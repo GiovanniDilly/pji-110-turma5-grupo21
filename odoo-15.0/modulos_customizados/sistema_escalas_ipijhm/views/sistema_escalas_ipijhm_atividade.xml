@@ -7,11 +7,11 @@
             <tree string="Atividades" decoration-danger="possui_erro == True">
                 <field name="possui_erro" invisible="1"/>
                 <field name="name"/>
-                <field name="descricao"/>
                 <field name="status"/>
                 <field name="prioridade" widget="priority"/>
+                <field name="possui_erro" widget="boolean_toggle"/>
                 <field name="create_date"/>
-                <field name="escalados_ids" nolabel="1" widget="badges" options="{'no_create_edit': True}"/>
+                <field name="escalados_ids" nolabel="1" widget="many2many_tags" options="{'no_create_edit': True}"/>
             </tree>
         </field>
     </record>
@@ -33,12 +33,12 @@
                         <field name="name"/>
                         <field name="prioridade" widget="priority"/>
                         <field name="descricao"/>
-                        <field name="possui_erro" widget="toggle"/>
+                        <field name="possui_erro" widget="boolean_toggle"/>
                     </group>
                     <notebook>
                          <page string="Escalados">
                             <group>
-                                <field name="escalados_ids" nolabel="1" widget="badges" options="{'no_create_edit': True}"/>
+                                <field name="escalados_ids" nolabel="1" widget="many2many_kanban" options="{'no_create_edit': True}"/>
                             </group>
                         </page>
                     </notebook>
@@ -47,29 +47,6 @@
         </field>
     </record>
     
-<!--   <record id="sistema_escalas_ipijhm_atividade_search" model="ir.ui.view">-->
-<!--        <field name="name">sistema_escalas_ipijhm.atividade.search</field>-->
-<!--        <field name="model">sistema_escalas_ipijhm.atividade</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search string="Buscar">-->
-<!--                <field name="valor"/>-->
-<!--                <field name="tipo_transacao"/>-->
-
-<!--                <filter name="filter_em_dinheiro" string="Em Dinheiro" domain="[('tipo_transacao', '=', 'dinheiro')]"/>-->
-<!--                <filter name="filter_em_conta" string="Em Conta" domain="['!', ('tipo_transacao', '=', 'dinheiro')]"/>-->
-<!--                <separator/>-->
-<!--                <filter name="filter_escala" string="Entrada" domain="[('valor', '>', 0)]"/>-->
-<!--                <filter name="filter_saida" string="Saída" domain="['!', ('valor', '>', '0')]"/>-->
-<!--                <separator/>-->
-<!--                <filter name="filter_aprovado" string="Realizadas" domain="['|', ('status', '=', 'feito'), ('status', '=', 'aprovado')]"/>-->
-<!--                <filter name="filter_nao_aprovado" string="Não Realizadas" domain="['&amp;', ('status', '!=', 'feito'), ('status', '!=', 'aprovado')]"/>-->
-
-<!--                <group expand="1" string="Group By">-->
-<!--                    <filter string="Agrupar por Data da Transação" name="group_by_data_transacao" context="{'group_by':'data_transacao:month'}"/>-->
-<!--                </group>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
 
     <record id="sistema_escalas_ipijhm_atividade_action" model="ir.actions.act_window">
         <field name="name">Atividades</field>

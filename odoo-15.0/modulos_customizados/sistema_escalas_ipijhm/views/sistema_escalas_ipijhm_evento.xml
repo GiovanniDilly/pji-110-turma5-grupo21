@@ -4,8 +4,7 @@
         <field name="name">sistema_escalas_ipijhm.evento.tree</field>
         <field name="model">sistema_escalas_ipijhm.evento</field>
         <field name="arch" type="xml">
-            <tree string="Eventos" decoration-danger="evento_com_erro == 1">
-                <field name="evento_com_erro" invisible="1"/>
+            <tree string="Eventos" decoration-danger="status == '5'">
                 <field name="name"/>
                 <field name="data_horario"/>
                 <field name="status"/>
@@ -22,7 +21,7 @@
             <form string="Evento">
                 <header>
                     <button name="concluir_evento" class="btn-primary" type="object" string="Concluir Evento"
-                            attrs="{'invisible': [('status', '!=', '2')]}"/>
+                            attrs="{'invisible': ['|', ('status', '!=', '2'), ('qtd_atividades_pendentes', '>', '0')]}"/>
                     <button name="cancelar_evento" class="btn-danger" type="object" string="Cancelar Evento"
                             attrs="{'invisible': [('status', '!=', '1'), ('status', '!=', '2')]}"/>
                     <field name="status" widget="statusbar" statusbar_visible="0,1,2,3"/>
@@ -50,30 +49,6 @@
         </field>
     </record>
     
-<!--   <record id="sistema_escalas_ipijhm_evento_search" model="ir.ui.view">-->
-<!--        <field name="name">sistema_escalas_ipijhm.evento.search</field>-->
-<!--        <field name="model">sistema_escalas_ipijhm.evento</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search string="Buscar">-->
-<!--                <field name="valor"/>-->
-<!--                <field name="tipo_transacao"/>-->
-
-<!--                <filter name="filter_em_dinheiro" string="Em Dinheiro" domain="[('tipo_transacao', '=', 'dinheiro')]"/>-->
-<!--                <filter name="filter_em_conta" string="Em Conta" domain="['!', ('tipo_transacao', '=', 'dinheiro')]"/>-->
-<!--                <separator/>-->
-<!--                <filter name="filter_escala" string="Entrada" domain="[('valor', '>', 0)]"/>-->
-<!--                <filter name="filter_saida" string="Saída" domain="['!', ('valor', '>', '0')]"/>-->
-<!--                <separator/>-->
-<!--                <filter name="filter_aprovado" string="Realizadas" domain="['|', ('status', '=', 'feito'), ('status', '=', 'aprovado')]"/>-->
-<!--                <filter name="filter_nao_aprovado" string="Não Realizadas" domain="['&amp;', ('status', '!=', 'feito'), ('status', '!=', 'aprovado')]"/>-->
-
-<!--                <group expand="1" string="Group By">-->
-<!--                    <filter string="Agrupar por Data da Transação" name="group_by_data_transacao" context="{'group_by':'data_transacao:month'}"/>-->
-<!--                </group>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
-
     <record id="sistema_escalas_ipijhm_evento_action" model="ir.actions.act_window">
         <field name="name">Eventos</field>
         <field name="res_model">sistema_escalas_ipijhm.evento</field>
