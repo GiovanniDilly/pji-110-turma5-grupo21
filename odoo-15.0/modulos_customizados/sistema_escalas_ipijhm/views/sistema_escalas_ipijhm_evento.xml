@@ -4,7 +4,9 @@
         <field name="name">sistema_escalas_ipijhm.evento.tree</field>
         <field name="model">sistema_escalas_ipijhm.evento</field>
         <field name="arch" type="xml">
-            <tree string="Eventos">
+            <tree string="Eventos" decoration-danger="evento_com_erro == 1">
+                <field name="evento_com_erro" invisible="1"/>
+                <field name="name"/>
                 <field name="data_horario"/>
                 <field name="status"/>
                 <field name="create_date"/>
@@ -28,6 +30,7 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="name"/>
                             <field name="descricao"/>
                         </group>
                         <group>

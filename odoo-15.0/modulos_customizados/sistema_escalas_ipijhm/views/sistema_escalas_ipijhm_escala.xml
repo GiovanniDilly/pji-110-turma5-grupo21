@@ -17,10 +17,17 @@
         <field name="model">sistema_escalas_ipijhm.escala</field>
         <field name="arch" type="xml">
             <form string="Escala">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="1,2"/>
+                </header>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="status" widget="statusbar" statusbar_visible="1,2"/>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="logo" widget="image"  class="oe_avatar" nolabel="1"/>
+                        </group>
                     </group>
                     <notebook>
                         <page string="Eventos">

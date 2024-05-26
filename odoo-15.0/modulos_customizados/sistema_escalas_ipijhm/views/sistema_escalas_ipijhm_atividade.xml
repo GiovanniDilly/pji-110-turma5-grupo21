@@ -4,11 +4,14 @@
         <field name="name">sistema_escalas_ipijhm.atividade.tree</field>
         <field name="model">sistema_escalas_ipijhm.atividade</field>
         <field name="arch" type="xml">
-            <tree string="Atividades">
+            <tree string="Atividades" decoration-danger="possui_erro == True">
+                <field name="possui_erro" invisible="1"/>
                 <field name="name"/>
                 <field name="descricao"/>
                 <field name="status"/>
+                <field name="prioridade" widget="priority"/>
                 <field name="create_date"/>
+                <field name="escalados_ids" nolabel="1" widget="badges" options="{'no_create_edit': True}"/>
             </tree>
         </field>
     </record>
@@ -28,8 +31,17 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <field name="prioridade" widget="priority"/>
                         <field name="descricao"/>
+                        <field name="possui_erro" widget="toggle"/>
                     </group>
+                    <notebook>
+                         <page string="Escalados">
+                            <group>
+                                <field name="escalados_ids" nolabel="1" widget="badges" options="{'no_create_edit': True}"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

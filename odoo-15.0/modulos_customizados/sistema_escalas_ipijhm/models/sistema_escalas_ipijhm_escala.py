@@ -10,6 +10,8 @@ class SistemaEscalasEscalaModel(models.Model):
 
     name = fields.Char(string="Nome da Escala", required=True)
 
+    logo = fields.Image(string="Logo da Escala")
+
     evento_ids = fields.One2many("sistema_escalas_ipijhm.evento", "escala_id")
 
     status = fields.Selection(string="Status", selection=[("0", "Sem Eventos"),

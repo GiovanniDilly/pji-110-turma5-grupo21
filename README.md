@@ -4,7 +4,7 @@
 
 ### Integrantes:
 - Antonio Agiz de Souza, RA: 2203145, user: ANTONIO-AGIZ
-- Armando Romio Junior, RA: 2202946, user: 
+- Armando Romio Junior, RA: 2202946, user: Jromio2
 - Cristiano de Amarante Santos, RA: 2202234, user: RazielSP74
 - Giovanni Dilly Scoralick Conceição, RA: 2207584, user: GiovanniDilly
 - Larissa Alves da Silva Fontes, RA: 2203095, user: larissafontes21

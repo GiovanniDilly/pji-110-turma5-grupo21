@@ -12,3 +12,5 @@ class Users(models.Model):
     privilegio_sistema_escala = fields.Selection(string="Privilégio no Sistema de Escalas da IPIJHM",
                                                  selection=[("0", "Usuário Normal"), ("1", "Administrador")],
                                                  default="0")
+
+    solicitacoes_conflitantes = fields.Many2one("sistema_escalas_ipijhm.solicitacao", string="Solcitações Conflitantes")

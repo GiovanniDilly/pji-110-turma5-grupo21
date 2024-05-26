@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sistema_escalas_ipijhm_solicitacao_action_tree" model="ir.ui.view">
+        <field name="name">sistema_escalas_ipijhm.solicitacao.tree</field>
+        <field name="model">sistema_escalas_ipijhm.solicitacao</field>
+        <field name="arch" type="xml">
+            <tree string="Solicitações de Ausência">
+                <field name="name"/>
+                <field name="motivo"/>
+                <field name="data_inicio"/>
+                <field name="data_fim"/>
+                <field name="categoria"/>
+                <field name="colaborador_nome"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sistema_escalas_ipijhm_solicitacao_form" model="ir.ui.view">
+        <field name="name">sistema_escalas_ipijhm.solicitacao.form</field>
+        <field name="model">sistema_escalas_ipijhm.solicitacao</field>
+        <field name="arch" type="xml">
+            <form string="Solicitações de Ausência">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" attrs="{'invisible': [('name', '=', False)]}"/>
+                            <field name="colaborador"/>
+                            <field name="motivo"/>
+                        </group>
+                        <group>
+                            <field name="data_inicio"/>
+                            <field name="data_fim"/>
+                            <field name="categoria"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sistema_escalas_ipijhm_solicitacao_action" model="ir.actions.act_window">
+        <field name="name">Solicitações de Ausência</field>
+        <field name="res_model">sistema_escalas_ipijhm.solicitacao</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                View de Solicitações de Ausência do Sistema de Escalas da IPIJHM
+            </p>
+        </field>
+    </record>
+</odoo>

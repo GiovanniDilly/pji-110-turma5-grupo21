@@ -3,5 +3,7 @@
     <menuitem id="sistema_escalas_ipijhm_menu_root" name="Sistema de Escalas IPIJHM" sequence="10">
         <menuitem id="sistema_escalas_ipijhm_escala_menu" action="sistema_escalas_ipijhm_escala_action"
                   name="Escala" sequence="10"/>
+        <menuitem id="sistema_escalas_ipijhm_solicitacao_menu" action="sistema_escalas_ipijhm_solicitacao_action"
+                  name="Solicitações de Ausência" sequence="20"/>
     </menuitem>
 </odoo>
